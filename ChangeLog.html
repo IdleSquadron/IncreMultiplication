@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--NOTE:
+Eras are h1 (such as Early Versions, Content or something like that).
+Content-based updates are h2.
+Balancing/Decently big bugfixing Updates are h3.
+Small (QoL/very small/bugfixing) updates are h4.-->
+<html>
+  <head>
+    <!--CSS stuff-->
+    <link rel="stylesheet" href="ChangeLogstyle.css" />
+  </head>
+  <body>
+    <p class="intro-txt center">
+      Welcome to the Multiplying Idle Game ChangeLog!
+    </p>
+    <p class="center">
+      <i>
+        I've compiled a list of key moments and updates of the game's ongoing
+        development - for the sake of doing so - including dates of the
+        specified key moments. Enjoy, and thanks for taking your time away to
+        appreciate this ChangeLog!
+        <br />
+      </i>
+    </p>
+    <i>
+      <b>Notes:</b>
+      <ul>
+        <li>
+          The headings of more significant updates/moments are larger in text
+          size than less significant updates.
+        </li>
+        <li>
+          The dates specified in this Change Log are formatted as DD/MM/YYYY.
+        </li>
+        <li>
+          Totally not inherited from
+          <a href="https://patcailmemer.github.io/Ordinal-Markup">
+            Ordinal Markup's</a
+          >
+          <a href="https://patcailmemer.github.io/Ordinal-Markup/changelog.html"
+            >Change Log</a
+          >.
+        </li>
+        <li>
+          There is an easter egg in every update! It changes every update.
+        </li>
+      </ul>
+    </i>
+    <button onclick="location.href='/'">
+      Back to Game
+    </button>
+    <div id="updates-list">
+      <h1>
+        Early Versions (26/7/2020 -> TbA)
+      </h1>
+      <h4>The Start (26/7/2020)</h4>
+      Created and started the project.
+      <h2>
+        <a href="https://v0-1multiplyingidlegame.glitch.me">v0.1</a> ~ The First
+        Version (29/7/2020)
+      </h2>
+      The first officially released version of the game.
+      <ul>
+        <li><b>Implemented Multipliers.</b></li>
+        <li>
+          Started work on 3 tabs, but only the 1<sup>st</sup> tab has content
+          for now. They are:
+          <ul>
+            <li>Multipliers</li>
+            <li>Settings</li>
+            <li>Statistics</li>
+          </ul>
+        </li>
+        <li>Simple CSS.</li>
+        <li>Added Multiplier Prestiges.</li>
+        <li>
+          Production is based on time since last frame to stabilise progress and
+          to allow for off-tab progression.<br />No Oflline Progression yet
+          though.
+        </li>
+        <li>
+          Added and started working on the Change Log on this game, which is
+          what you are on currently.
+        </li>
+        <li>And Useless Functions!</li>
+      </ul>
+      <b>Known Bugs:</b>
+      <ul>
+        <li>
+          <b>The "Buy Multiplier" Bug:</b>
+          <ul>
+            <li>
+              The game is not playable on most PCs, as the "Buy Multiplier"
+              buttons do not work there.
+            </li>
+            <li>
+              Also, on Mobile, the bug is still present, but not as major. Only
+              sometimes do "Buy Multiplier" buttons work, which can still be
+              annoying.
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <b>Fun Facts:</b>
+      <ul>
+        <li>I coded this update on mobile, explaining the PC bugs ;-;</li>
+      </ul>
+      <h3><a href="/">v0.2</a> ~ A Crucial Update (1/8/2020)</h3>
+      An important update that greatly increases playability, but isn't too
+      major content-wise.
+      <ul>
+        <li>
+          <b>Added an Auto-saving feature.</b> This also allows for more
+          progressing means like offline-like progression.
+        </li>
+        <li>
+          Balanced the game.
+          <ul>
+            <li>
+              Decreased the Multiplier Prestige costs from<br />
+              <i>[250, 1000, 5e4, 1e7, 1e10, 1e15, 1e20, 1e26, 1e32]</i>
+              to<br />
+              <i>[250, 1000, 5e4, 7.5e6, 1e10, 1.25e14, 1e19, 2e24, 1e30]</i>.
+            </li>
+            <li>
+              Also nerfed the effect from Mutliplier Prestiges to Number growth,
+              from
+              <b>((<var>x</var> + 1)<sup>2</sup> + <var>x</var> + 1) / 2</b> to
+              simply <b><var>x</var>+1</b>, where <b><var>x</var></b> represents
+              how many Multiplier Prestiges you have performed.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Optimised the game's code a bit by decreasing lines of code and
+          processes (such as
+          <code>for</code> loops) while maintaining performance.
+        </li>
+        <li>Some CSS tweaks to make things look a lil' better.</li>
+        <li>Tweaked + sorted out some JS code and changed the <code>game.multipliers</code> format from <code>{amount:[number,number],boost:[number,number]}</code> to <code>[{amount:number,boost:number},{amount:number,boost:number}]</code>, and changed the code that gets the variable accordingly.</li>
+        <li>Removed the effect from some browsers on mobile where when you double click, the screen will zoom in, and the click delay. This gets annoying, so I decided to remove that feature.</li>
+        <ul>
+          <li>Also disabled selecting. This may be a controversial change.</li>
+        </ul>
+        <li>Added more styling to the Change Log.</li>
+        <li>
+          <b>Also added PC support!</b> I did this by performing as listed in
+          the <b>Bug Fixes</b> section of this Update.
+        </li>
+      </ul>
+      <b>Bug Fixes:</b>
+      <ul>
+        <li>
+          <b>Fixed the "Buy Multiplier" Bug (both on Mobile and PC) by:</b>
+          <ul>
+            <li>
+              Changing the way the Multipliers section of the 1<sup>st</sup>
+              tab, or "tab1" in the HTML, updates.
+              <br />
+              In this way, no longer would it update every frame, rather only
+              when the player performs a certain action such as buying a
+              Multiplier.
+            </li>
+            <li>
+              Also separating the code that updates the Multiplier values from
+              initially, in order to make this possible.
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <b>Known Bugs:</b>
+      <ul>
+        <li>N/A</li>
+      </ul>
+      <b><i>TO BE CONTINUED...</i></b>
+    </div>
+  </body>
+</html>
