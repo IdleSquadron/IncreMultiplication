@@ -1,6 +1,7 @@
 "use strict";
 tab(1);
 load();
+updateMultipliers();
 function increment(n = 1) {
   if (!n) n = 1;
   game.number += n;
