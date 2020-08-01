@@ -1,0 +1,10 @@
+body {
+  font-family: helvetica, arial, sans-serif;
+}
+.intro-txt {
+  font-size: 25px;
+  font-weight: bold;
+}
+.center {
+  text-align: center;
+}
