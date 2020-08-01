@@ -25,11 +25,13 @@ function reset() {
 }
 function load() {
   reset();
-  getSave();
-  game.number = saveThing.number;
-  game.multipliers = saveThing.multipliers;
-  game.multiplierPrestiges = saveThing.multiplierPrestiges;
-  game.lastTick = saveThing.lastTick;
+  if (localStorage.getItem("MultiplyingIdleGameSave")) {
+    getSave();
+    game.number = saveThing.number;
+    game.multipliers = saveThing.multipliers;
+    game.multiplierPrestiges = saveThing.multiplierPrestiges;
+    game.lastTick = saveThing.lastTick;
+  }
   updateMultipliers();
 }
 function clipboard(txt) {}
