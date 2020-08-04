@@ -6,7 +6,7 @@ let save = {
   lastTick: Date.now()
 };
 const autoSave = setInterval(() => {
-  //saveSave();
+  saveSave();
 }, 1e3);
 
 function getSave() {

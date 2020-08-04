@@ -62,9 +62,20 @@ function importS(save) {
     get("import-input").value = "";
   }
   if (errorx < 1 && save) {
-    load(parseSave(save));
+    loadImportedSave(parseSave(save));
     leaveImportPrompt();
   }
+}
+function loadImportedSave(saveToLoad) {
+  reset();
+  if (saveToLoad) {
+    let savething = JSON.parse(saveToLoad);
+    game.number = savething.number;
+    game.multipliers = savething.multipliers;
+    game.multiplierPrestiges = savething.multiplierPrestiges;
+    game.lastTick = savething.lastTick;
+  }
+  updateMultipliers();
 }
 function exportS() {
   let copy = get("exportSaveData");
@@ -80,11 +91,16 @@ function formSave(save) {
 }
 function parseSave(save) {
   return atob(atob(save));
-} /*) {
+} 
+/*More secure saves coming soon. vvvvvv
+function changeUniOfStr(save, base = 10) {
+  let result = "";
+  for(let c = 0; c<save.length;c++/*HAHA LOLOL "C++" REFERENCE*//*) {
     result = result.concat((save.charCodeAt(c)).toString(base)+";");
   }
   return result.slice(0,result.length-1);
 }
+
 function parseUniOfStr(save, base) {
   let sav = save.split(";");
   let result = "";
@@ -93,7 +109,3 @@ function parseUniOfStr(save, base) {
   }
   return result;
 }*/
-/*More secure saves coming soon. vvvvvv
-function changeUniOfStr(save, base = 10) {
-  let result = "";
-  for(let c = 0; c<save.length;c++/*HAHA LOLOL "C++" REFERENCE*/
