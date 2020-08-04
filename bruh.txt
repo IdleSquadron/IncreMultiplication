@@ -1,7 +1,7 @@
 Brainstorm:
 At the start of the game, there will be an automatically increasing number (by 1).
 There will be 10 Multipliers that will costs an amount of the number. They are unlocked one-by-one by Multiplier Prestiges, which is a prestige mechanic. Note that with 0 Multiplier Prestigers, you have 1 Multiplier unlocked.
-These Multipliers increase a value that multiply Number growth (totally not ripped from Ordinal Markup's Dynamic Factor).
+These Multipliers increase a value that multipliee Number growth (totally not ripped from Ordinal Markup's Dynamic Factor).
 Each Multiplier multiplicatively stacks with each other (totally not ripped from Ordinal Markup's Factors and loosely from Antimatter Dimensions' Dimensions (varieties)).
-The Cost of each Multiplier will scale faster (exponentially) depending on how many times you've bought the respective Multiplier.
+The Cost of each Multiplier will scale exponentially faster depending on how many times you've bought the respective Multiplier.
 Multiplier Prestiges will become harder to get each time, and they cap out at 9 since there are only 10 Multipliers.
