@@ -1,18 +1,18 @@
 //let saveName = "MultiplyingIdleGameSave";
-let saveThing = {
+let save = {
   number: 0,
-  multipliers: { amount: [0], boost: [1] },
+  multipliers: [{ amount: 0, boost: 1 }],
   multiplierPrestiges: 0,
   lastTick: Date.now()
 };
 const autoSave = setInterval(() => {
-  save();
+  //saveSave();
 }, 1e3);
 
 function getSave() {
   let c = JSON.parse(localStorage.getItem("MultiplyingIdleGameSave"));
   for (let n in c) {
-    saveThing[n] = c[n];
+    save[n] = c[n];
   }
 }
 function setSave() {
@@ -21,20 +21,25 @@ function setSave() {
 function reset() {
   game.number = 0;
   game.multipliers = [{ amount: 0, boost: 1 }];
+  game.multiplierPrestiges=0;
   game.lastTick = Date.now();
+  tab(1);
+  leaveResetPrompt();
+  updateMultipliers();
 }
-function load() {
+function load(saveToLoad) {
   reset();
-  if (localStorage.getItem("MultiplyingIdleGameSave")) {
+  if (saveToLoad) {
     getSave();
-    game.number = saveThing.number;
-    game.multipliers = saveThing.multipliers;
-    game.multiplierPrestiges = saveThing.multiplierPrestiges;
-    game.lastTick = saveThing.lastTick;
+    game.number = save.number;
+    game.multipliers = save.multipliers;
+    game.multiplierPrestiges = save.multiplierPrestiges;
+    game.lastTick = save.lastTick;
   }
   updateMultipliers();
 }
 function clipboard(txt) {}
-function save() {
+function saveSave() {
   setSave();
+  //get("exportSaveData").value = localStorage.getItem("MultiplyingIdleGameSave");
 }
