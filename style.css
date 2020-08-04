@@ -1,0 +1,100 @@
+html {
+  touch-action: manipulation;
+  font-size: 15px;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none;
+}
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 2em;
+}
+.popup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border: 3px solid black;
+  /*width: 300px;
+  height: 120px;*/
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  text-align: center;
+  z-index: 2;
+  color: black;
+  padding: 10px;
+  padding-bottom: 15px;
+}
+.popup-main-text {
+  font-weight: bold;
+  font-size: 25px;
+  margin: 0 0 10px;
+}
+#importError {
+  opacity: 0;
+  color: black !important;
+}
+#settings {
+  display: flex;
+}
+#settings>button {
+  margin-right: 20px;
+}
+#importErrorShow {
+  opacity: 1;
+  transition-duration: 5s;
+}
+.invisible {
+  background: transparent !important;
+  border: none !important;
+  color: transparent !important;
+}
+#number {
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+.normalButton {
+  background: white;
+  border-radius: 3px;
+  border: 2px solid black;
+  font-size: 15px;
+  color: black;
+  /*width: 100px;*/
+  height: 50px;
+  text-align: center;
+}
+.tabButton {
+  background: white;
+  border-radius: 3px;
+  border: 2px solid black;
+  font-size: 15px;
+  color: black;
+  width: 120px;
+  height: 45px;
+  text-align: center;
+  font-weight: bold;
+}
+#options-row {
+  display: flex;
+  margin-bottom: 20px;
+}
+#options-row :not(:first-child) {
+  margin-left: 20px;
+}
+#tab1 #multiplierListMain div {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+#tab1 div > * {
+  margin-right: 25px;
+}
+/*.buyable{background-color:#55ff55};*/
+.bad {
+  background: red;
+  color:orange;
+  border-color:#d00000;
+}
