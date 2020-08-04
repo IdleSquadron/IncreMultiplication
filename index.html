@@ -1,21 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Multiplying Idle Game</title>
     <meta charset="utf-8" />
     <!--CSS imports-->
     <link rel="stylesheet" href="css/style.css" />
 
     <!--JS imports-->
-    <script src="js/Variables.js" defer="true"></script>
-    <script src="js/Notations.js" defer="true"></script>
-    <script src="js/SavingSystem.js" defer="true"></script>
-    <script src="js/Shortcuts.js" defer="true"></script>
-    <script src="js/prestige.js" defer="true"></script>
-    <script src="js/formulas.js" defer="true"></script>
-    <script src="js/GameLoop.js" defer="true"></script>
-    <script src="js/script.js" defer="true"></script>
+    <script src="js/Shortcuts.js" defer></script>
+    <script src="js/Variables.js" defer></script>
+    <script src="js/Notations.js" defer></script>
+    <script src="js/SaveHandlingSystem/Auto-Save.js" defer></script>
+    <script src="js/SaveHandlingSystem/Export-Import.js" defer></script>
+    <script src="js/prestige.js" defer></script>
+    <script src="js/formulas.js" defer></script>
+    <script src="js/GameLoop.js" defer></script>
+    <script src="js/script.js" defer></script>
   </head>
   <body>
+    <div>
+      <div class="popup" id="importpopup" style="visibility:hidden">
+        <p class="popup-main-text">
+          You Are About to Import a Save.
+        </p>
+        <p>
+          Import your save here:
+        </p>
+          <input type="text" id="import-input"><button onclick="importS(get('import-input').value)">
+          Import
+          </button>
+        <p id="importError" style="opacity:0">
+          Sorry, but the save file is not valid. Please import a valid save file.
+        </p>
+        <button onclick="leaveImportPrompt()">
+          Exit
+        </button>
+      </div>
+      <div class="popup" id="resetpopup" style="visibility:hidden">
+        <p class="popup-main-text">
+          YOU ARE ABOUT TO RESET YOUR PROGRESS ON THIS GAME.
+        </p>
+        <p>
+          Use with caution. You will lose your save forever!
+           It is recommended to export your save first before doing this, unless you really want to start over.
+        </p>
+        <button onclick="reset()">
+          Confirm
+        </button>
+        <button onclick="leaveResetPrompt()">
+          Cancel
+        </button>
+        <br>
+        <span id="shh" class="invisible" onclick="this.className=''">
+          Hint: <span>Mult</span>iplier <span>Pres</span>tiges...
+        </span>
+      </div>
+    </div>
     <p><span id="number">0</span> (+<span id="number/s">1</span>/s)</p>
     <div id="options-row">
       <button class="tabButton" onclick="tab(1)">
@@ -26,9 +66,6 @@
       </button>
       <button class="tabButton" onclick="tab(3)">
         Statistics
-      </button>
-      <button class="tabButton invisible" onmousedown="tab(4);this.className='tabButton'">
-        Sike
       </button>
     </div>
     <div id="tab1" style="display:none">
@@ -47,36 +84,40 @@
       </div>
       <div>
         <p>
-          Multiplier Prestiges (<span id="multiplierPrestiges">0</span>):
+          <b>Multiplier Prestiges</b> (<span id="multiplierPrestiges">0</span>):
           Requires
           <span id="multiplierPrestigeRequirement">250</span>
         </p>
         <button class="normalButton unbuyable" onclick="multiplierPrestige()">
           Do a Multiplier Prestige
         </button>
+        <br>
+        <p class="invisible" style="font-size:25px" onclick="if(get('shh').className==='')this.className=''">
+          <span>Y</span>ou <span>fo</span>u<span>n</span><span>d t</span>h<span>e E</span>a<span></span>st<span>e</span>r <span>E</span><span>g</span>g, g<span></span><span>o</span>o<span>d jo</span><span>b</span>!
+        </p>
       </div>
     </div>
     <div id="tab2" style="display:none">
-      <div>
-        Coming soon...
-      </div>
-      <a href="/multiplying-idle-game/ChangeLog.html">Change Log</a>
+      <div id="settings">
+        <button class="normalButton" onclick="prompts.import()">
+          Import
+        </button>
+        <button class="normalButton" onclick="exportS()">
+          Export
+        </button>
+        <button class="normalButton bad" onclick="prompts.reset()">
+          Reset your Game
+        </button>
+      </div><br>
+      <a id="changelog-link" href="/multiplying-idle-game/ChangeLog.html">Change Log</a>
     </div>
     <div id="tab3" style="display:none"></div>
     <div id="tab4" style="display:none">
       <p>
         <!--You have <span id="prestigePoints">0</span> Prestige Points, translating
-        to a 1x multiplier to Mutliplier Boost Growth.-->Haha, not the easter
-        egg anymore...
+        to a 1x multiplier to Mutliplier Boost Growth.-->
       </p>
-      <div style="display:flex">
-      <div id="shh" class="invisible" style="width:50px;height:50px" onclick="this.className=''">
-        Clever...
-      </div>
-        <div class="invisible" style="margin-left:20px;font-size:250px" onclick="if(get('shh').className==='')this.className=''">
-          You found the EASTER EGG!
-      </div>
     </div>
-    </div>
+    <input id="exportSaveData" value="" style="left: 99999px; width: 1px; height: 1px; position: fixed;">
   </body>
 </html>
