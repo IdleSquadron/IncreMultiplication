@@ -62,9 +62,20 @@ function importS(save) {
     get("import-input").value = "";
   }
   if (errorx < 1 && save) {
-    load(parseSave(save));
+    loadImportedSave(parseSave(save));
     leaveImportPrompt();
   }
+}
+function loadImportedSave(saveToLoad) {
+  reset();
+  if (saveToLoad) {
+    let savething = JSON.parse(saveToLoad);
+    game.number = savething.number;
+    game.multipliers = savething.multipliers;
+    game.multiplierPrestiges = savething.multiplierPrestiges;
+    game.lastTick = savething.lastTick;
+  }
+  updateMultipliers();
 }
 function exportS() {
   let copy = get("exportSaveData");
@@ -80,7 +91,7 @@ function formSave(save) {
 }
 function parseSave(save) {
   return atob(atob(save));
-}
+} 
 /*More secure saves coming soon. vvvvvv
 function changeUniOfStr(save, base = 10) {
   let result = "";
