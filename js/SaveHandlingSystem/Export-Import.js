@@ -1,3 +1,48 @@
+const prompts = {
+  import: function() {
+    let dont = document.querySelectorAll("#importpopup button");
+    get("importpopup").style.visibility = "visible";
+    getAllButtons();
+    for (let m = 0; m < dont.length; m++) {
+      dont[m].disabled = false;
+    }
+  },
+  reset: function() {
+    let dont = document.querySelectorAll("#resetpopup button");
+    get("resetpopup").style.visibility = "visible";
+    getAllButtons();
+    for (let m = 0; m < dont.length; m++) {
+      dont[m].disabled = false;
+    }
+  }
+};
+var erro = get("importError");
+function ree(count) {
+  erro.style.opacity = "" + (100 - count * 2) / 100;
+}
+function animateError() {
+  if (ani) ani = "";
+  let counter = 0;
+  var ani = setInterval(function() {
+    ree(counter);
+    counter++;
+    if (counter > 50) {
+      clearInterval(ani);
+    }
+  }, 100);
+}
+function leaveImportPrompt() {
+  getAllButtons(false);
+  get("importpopup").style.visibility = "hidden";
+  get("import-input").value = "";
+}
+function leaveResetPrompt() {
+  get("resetpopup").style.visibility = "hidden";
+  getAllButtons(false);
+}
+function getAllButtons(disable = true) {
+  let allButtons = document.querySelectorAll("button");
+  if (disable) {
     for (let n = 0; n < allButtons.length; n++) {
       allButtons[n].disabled = true;
     }
@@ -35,11 +80,16 @@ function formSave(save) {
 }
 function parseSave(save) {
   return atob(atob(save));
-} /*) {
+}
+/*More secure saves coming soon. vvvvvv
+function changeUniOfStr(save, base = 10) {
+  let result = "";
+  for(let c = 0; c<save.length;c++/*HAHA LOLOL "C++" REFERENCE*//*) {
     result = result.concat((save.charCodeAt(c)).toString(base)+";");
   }
   return result.slice(0,result.length-1);
 }
+
 function parseUniOfStr(save, base) {
   let sav = save.split(";");
   let result = "";
@@ -48,7 +98,3 @@ function parseUniOfStr(save, base) {
   }
   return result;
 }*/
-/*More secure saves coming soon. vvvvvv
-function changeUniOfStr(save, base = 10) {
-  let result = "";
-  for(let c = 0; c<save.length;c++/*HAHA LOLOL "C++" REFERENCE*/
