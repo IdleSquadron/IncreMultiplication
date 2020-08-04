@@ -29,7 +29,7 @@ function multiplyArrayTogether(arr) {
   return n;
 }
 
-function multiplyObjArrayTogether(arr,location) {
+function multiplyObjArrayTogether(arr, location) {
   var n = 1;
   for (let x = 0; x < arr.length; x++) {
     n *= arr[x][location];
