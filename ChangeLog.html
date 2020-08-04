@@ -8,17 +8,24 @@ Small (QoL/very small/bugfixing) updates are h4.-->
   <head>
     <!--CSS stuff-->
     <link rel="stylesheet" href="ChangeLogstyle.css" />
+    <script>
+      var url=location.href,
+          gl=document.getElementById("backToGameButton");
+        function backToGame() {
+          location.href=(url.includes("glitch.me"))?"/":((url.includes("idlesquadron.github.io"))?"/multiplying-idle-game":"/");
+      };
+    </script>
   </head>
   <body>
     <p class="intro-txt center">
-      Welcome to the Multiplying Idle Game ChangeLog!
+      Welcome to the Multiplying Idle Game Change Log!
     </p>
     <p class="center">
       <i>
         I've compiled a list of key moments and updates of the game's ongoing
         development - for the sake of doing so - including dates of the
         specified key moments. Enjoy, and thanks for taking your time away to
-        appreciate this ChangeLog!
+        appreciate this Change Log!
         <br />
       </i>
     </p>
@@ -35,19 +42,23 @@ Small (QoL/very small/bugfixing) updates are h4.-->
         <li>
           Totally not inherited from
           <a href="https://patcailmemer.github.io/Ordinal-Markup">
-            Ordinal Markup's</a
-          >
-          <a href="https://patcailmemer.github.io/Ordinal-Markup/changelog.html"
-            >Change Log</a
-          >.
+            Ordinal Markup's
+          </a>
+          <a href="https://patcailmemer.github.io/Ordinal-Markup/changelog.html">Change Log</a>.
         </li>
         <li>
-          There is an easter egg in every update! It changes every update.
+          There is an easter egg in every update! It changes every update, even in minor updates.
+        </li>
+        <li>Links have been provided for accessing earlier versions of the game, for nostalgic purposes
+          or the curious or simply the ones on the lookout for easter eggs in all the versions.
         </li>
       </ul>
     </i>
-    <button onclick="location.href='/'">
+    <button id="backToGameButton" onclick="backToGame()">
       Back to Game
+    </button>
+    <button onclick="window.scrollTo(0,document.body.scrollHeight);">
+      View Recent Patch
     </button>
     <div id="updates-list">
       <h1>
@@ -60,6 +71,9 @@ Small (QoL/very small/bugfixing) updates are h4.-->
         Version (29/7/2020)
       </h2>
       The first officially released version of the game.
+      <br>
+      <br>
+      <b>Content:</b>
       <ul>
         <li><b>Implemented Multipliers.</b></li>
         <li>
@@ -71,6 +85,7 @@ Small (QoL/very small/bugfixing) updates are h4.-->
             <li>Statistics</li>
           </ul>
         </li>
+        <li>Implemented Notations, but only Scientific Notation is supported.</li>
         <li>Simple CSS.</li>
         <li>Added Multiplier Prestiges.</li>
         <li>
@@ -105,9 +120,12 @@ Small (QoL/very small/bugfixing) updates are h4.-->
       <ul>
         <li>I coded this update on mobile, explaining the PC bugs ;-;</li>
       </ul>
-      <h3><a href="/">v0.2</a> ~ A Crucial Update (1/8/2020)</h3>
+      <h2><a href="https://v0-2multiplyingidlegame.glitch.me/">v0.2</a> ~ A Crucial Update (1/8/2020)</h2>
       An important update that greatly increases playability, but isn't too
       major content-wise.
+      <br>
+      <br>
+      <b>Content:</b>
       <ul>
         <li>
           <b>Added an Auto-saving feature.</b> This also allows for more
@@ -137,8 +155,18 @@ Small (QoL/very small/bugfixing) updates are h4.-->
           <code>for</code> loops) while maintaining performance.
         </li>
         <li>Some CSS tweaks to make things look a lil' better.</li>
-        <li>Tweaked + sorted out some JS code and changed the <code>game.multipliers</code> format from <code>{amount:[number,number],boost:[number,number]}</code> to <code>[{amount:number,boost:number},{amount:number,boost:number}]</code>, and changed the code that gets the variable accordingly.</li>
-        <li>Removed the effect from some browsers on mobile where when you double click, the screen will zoom in, and the click delay. This gets annoying, so I decided to remove that feature.</li>
+        <li>
+          Tweaked + sorted out some JS code and changed the
+          <code>game.multipliers</code> format from
+          <code>{amount:[number,number],boost:[number,number]}</code> to
+          <code>[{amount:number,boost:number},{amount:number,boost:number}]</code>
+          , and changed the code that gets the variable accordingly.
+        </li>
+        <li>
+          Removed the effect from some browsers on mobile where when you double
+          click, the screen will zoom in, and the click delay. This gets
+          annoying, so I decided to remove that feature.
+        </li>
         <ul>
           <li>Also disabled selecting. This may be a controversial change.</li>
         </ul>
@@ -172,7 +200,33 @@ Small (QoL/very small/bugfixing) updates are h4.-->
       <ul>
         <li>N/A</li>
       </ul>
-      <b><i>TO BE CONTINUED...</i></b>
+      <h3>
+        <a href="/">v0.21</a> ~ The Save Transferring Update (4/8/2020)
+      </h3>
+      A medium update that adds more options for saving.
+      <br>
+      <br>
+      <b>Content:</b>
+      <ul>
+        <li><b>Added 2 buttons in the Settings tab</b> - Importing and Exporting.<ul>
+          <li>Made it so that when you click "Import", there will be a custom prompt, because if a normal prompt is executed, the game will pause, losing production.</li>
+          <li>Export - Exports a save in <i>not Base 64</i> (secret!),
+            unlike other incrementals exporting in Base 64 (<code>btoa()</code> function) - which is generic.</li>
+          </ul></li>
+        <li>Also added the option to reset your save. .-.</li>
+        <li>Tweaked the code in the <code>Notations.js</code> file, so that numbers greater than 1 million is to be displayed in scientific notation.</li>
+        <li><small>Tiny</small> CSS changes.</li>
+        <li>Finally, sorted out the code in the Save Handling System.</li>
+      </ul>
+      <b>Bug Fixes:</b>
+      <ul>
+        <li>N/A</li>
+      </ul>
+      <b>Known Bugs:</b>
+      <ul>
+        <li>N/A</li>
+      </ul>
+      <b><i>More updates coming soon. They will be listed here as soon as possible...</i></b>
     </div>
   </body>
 </html>

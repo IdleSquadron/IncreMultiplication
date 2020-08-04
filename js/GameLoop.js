@@ -7,6 +7,8 @@ var elapsedTime = 0,
   debugTimeMult = 1;
 //END of TIME-RELATED Variables
 var multiplierGrowths = [];
+var cllink = get("changelog-link"),
+  url = location.href;
 var gameLoop = setInterval(function() {
   loop();
 }, 33);
@@ -50,13 +52,18 @@ function updateHTML() {
     ? localStorage.getItem("MultiplyingIdleGameSave")
     : notate(incrementer);
   get("multiplierPrestiges").innerHTML = debug
-    ? JSON.stringify(/*saveThing*/)
+    ? JSON.stringify(saveThing)
     : game.multiplierPrestiges;
   get("multiplierPrestigeRequirement").innerHTML = notate(
     multiplierPrestigeRequirements[game.multiplierPrestiges]
   );
   //updateMultipliers();
   updateMultStats();
+  if (url.includes("glitch.me")) {
+    cllink.href = "/ChangeLog.html";
+  } else if (url.includes("idlesquadron.github.io")) {
+    cllink.href = "/multiplying-idle-game/ChangeLog.html";
+  }
 }
 function updateMultipliers() {
   let multListHTML = "";

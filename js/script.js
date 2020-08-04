@@ -1,8 +1,8 @@
 "use strict";
 tab(1);
-load();
+load(localStorage.getItem("MultiplyingIdleGameSave"));
+updateMultipliers();
 function increment(n = 1) {
-  if (!n) n = 1;
   game.number += n;
   if (debug) console.log(`Incremented "game.number" by ${n}.`);
 }
