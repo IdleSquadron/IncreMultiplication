@@ -13,7 +13,7 @@ const defaultSettings = { notation: notations[0], updateInterval: 33, autoSaveIn
 let dev = {
   autobuyers: false,
   timeMult: 1,
-  disableSaves: true,
+  disableSaves: false,
   multiplierPrestiges: {
     rate: 1,
     boost: 1
