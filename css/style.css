@@ -1,27 +1,36 @@
 html {
-  touch-action: manipulation;
-  font-size: 15px;
+  font-size: 15px; /* Default font size */
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none;
+  -ms-user-select: none; /* Edge */
+  user-select: none; /* Global */
 }
 body {
-  font-family: helvetica, arial, sans-serif;
+  touch-action: manipulation; /*To prevent double tapping to zoom in on mobile. However, iOS Safari ignores this for some reason.*/
+  font-family: helvetica, arial, sans-serif; /* Default Font */
   margin: 2em;
 }
+
+#top-things {
+  margin-bottom: 20px;
+  background: white;
+  width: 100%;
+  position: -webkit-sticky; /* Safari */
+  position: sticky; /* Global */
+  top: 0;
+  z-index: 0;
+}
+/*#bannerPopupList>div{}*/
 .popup {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   border: 3px solid black;
-  /*width: 300px;
-  height: 120px;*/
   background-color: #f0f0f0;
   border-radius: 6px;
   text-align: center;
-  z-index: 2;
+  z-index: 0;
   color: black;
   padding: 10px;
   padding-bottom: 15px;
@@ -35,27 +44,30 @@ body {
   opacity: 0;
   color: black !important;
 }
-#settings {
-  display: flex;
-}
-#settings>button {
-  margin-right: 10px;
-}
-#importErrorShow {
-  opacity: 1;
-  transition-duration: 5s;
-}
+/*Settings collection*/
+#settings>div{display:flex;margin-bottom:10px}#settings>div>*{margin-right:10px}
+#importErrorShow { opacity: 1; transition-duration: 5s }
 .invisible {
   background: transparent !important;
   border: none !important;
   color: transparent !important;
 }
-#number {
-  font-size: 30px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  font-weight: bold;
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #d9d9d9
 }
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 14px;
+  background: #aaaaaa;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+#number { font-size: 30px; font-weight: bold }
 .normalButton {
   background: white;
   border-radius: 3px;
@@ -66,35 +78,98 @@ body {
   color: black;
   text-align: center;
 }
-.tabButton {
+.normal {
   background: white;
-  border-radius: 3px;
-  border: 2px solid black;
-  font-size: 15px;
   color: black;
+  border: 2px solid black;
+}
+p:first-child { margin-top: 0px }
+.tabButton {
+  border: 3px solid;
+  border-radius: 3px;
+  font-size: 15px;
   width: 120px;
   height: 45px;
   text-align: center;
   font-weight: bold;
+  transition-duration: 0.15s;
 }
-#options-row {
+.subtabButton {
+  border: 2px solid;
+  border-radius: 2px;
+  font-size: 10px;
+  text-align: center;
+  width: 80px;
+  height: 30px;
+  font-weight: bold;
+  transition-duration: 0.1s;
+}
+.normal:hover, .normalButton:hover {
+  background: #eaeaea;
+}
+#options-row, .flexbox {
   display: flex;
-  margin-bottom: 20px;
+}
+.flexbox :not(:first-child) {
+  margin-left: 13.333px
 }
 #options-row :not(:first-child) {
   margin-left: 20px;
 }
-#tab1 #multiplierListMain div {
+.inmultList {
   display: flex;
   flex-direction: row;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
-#tab1 div > * {
-  margin-right: 25px;
-}
-/*.buyable{background-color:#55ff55};*/
+#tab1 div > * { margin-right: 25px }
+/*.buyable{ background-color: #55ff55 }*/
 .bad {
   background: red;
-  color:orange;
-  border-color:#d00000;
+  color: orange;
+  border-color: #d00000;
 }
+#exportSaveData {
+  left: 99999px;
+  width: 1px;
+  height: 1px;
+  position: fixed;
+}
+#productButton {
+  position: absolute;
+  right: 50%;
+  width: 180px;
+  font-size: 13px;
+  height: 50px;
+}
+.products {
+  background: lime;
+  border-color: green;
+  color:green;
+}
+.productsButton {
+  background: lime;
+  border: 2px solid green;
+  font-size: 14px;
+  line-height: 16px;
+  padding:3px 10px;
+  color: green;
+  text-align: center;
+}
+.products:hover { background: green; color: lime }
+.factorUpgradeButton.bought {
+  background: lime !important;
+  border-color:green;
+}
+.factorUpgradeButton.unbought {
+  background: #f0f0f0 !important;
+}
+.factorUpgradeButton.unbought.buyable {
+  background: #50ba50 !important;
+}
+.factorUpgradeButton {
+  margin-right: 10px;
+  width: 200px;
+  font-size: 11px;
+  height: 100px;
+}
+.factorUpgrades > .row { display: flex; align-items: center; margin-bottom: 10px }

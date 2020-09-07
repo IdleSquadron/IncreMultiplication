@@ -1,23 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>Multiplying Idle Game</title>
+    <!--Nothing useful.-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174671570-1"></script><script>window.dataLayer=window.dataLayer||[];function g/*gtag*/(){dataLayer.push(arguments)};g('js',new Date()),g('config','UA-174671570-1')</script>
+    <!--The rest is useful.-->
+    <title>IncreMultiplication</title>
     <meta charset="utf-8" />
-    <!--CSS imports-->
-    <link rel="stylesheet" href="css/style.css" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0"/>
     <!--JS imports-->
     <script src="js/Shortcuts.js" defer></script>
     <script src="js/Variables.js" defer></script>
+    <script src="js/ExtraCSS.js" defer></script>
     <script src="js/Notations.js" defer></script>
     <script src="js/SaveHandlingSystem/Auto-Save.js" defer></script>
     <script src="js/SaveHandlingSystem/Export-Import.js" defer></script>
     <script src="js/prestige.js" defer></script>
     <script src="js/formulas.js" defer></script>
     <script src="js/GameLoop.js" defer></script>
+    <script src="js/Stats.js" defer></script>
     <script src="js/script.js" defer></script>
+    <!--CSS imports-->
+    <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body style="display:none">
     <div>
       <div class="popup" id="importpopup" style="visibility:hidden">
         <p class="popup-main-text">
@@ -26,23 +31,20 @@
         <p>
           Import your save here:
         </p>
-          <input type="text" id="import-input"><button onclick="importS(get('import-input').value)">
+        <input type="text" id="import-input" /><button onclick="importS(get('import-input').value)">
           Import
-          </button>
-        <p id="importError" style="opacity:0">
-          Sorry, but the save file is not valid. Please import a valid save file.
-        </p>
-        <button onclick="leaveImportPrompt()">
-          Exit
         </button>
+        <p id="importError" style="opacity:0">Sorry, but the save file is not valid. Please import a valid save file.</p>
+        <button onclick="leaveImportPrompt()">Exit</button>
       </div>
       <div class="popup" id="resetpopup" style="visibility:hidden">
         <p class="popup-main-text">
           YOU ARE ABOUT TO RESET YOUR PROGRESS ON THIS GAME.
         </p>
         <p>
-          Use with caution. You will lose your save forever!
-           It is recommended to export your save first before doing this, unless you really want to start over.
+          Use with caution. You will lose your local save forever! It is recommended
+          to export and store your save somewhere first before doing this, unless you are sure you want to
+          start over.
         </p>
         <button onclick="reset()">
           Confirm
@@ -50,55 +52,56 @@
         <button onclick="leaveResetPrompt()">
           Cancel
         </button>
-        <br>
-        <span id="shh" class="invisible" onclick="this.className=''">
-          Hint: <span>Mult</span>iplier <span>Pres</span>tiges...
-        </span>
+        <br />
+      </div>
+      <!--<div id="bannerPopupList" style="position: fixed; z-index: 1; top:0; left:80%; display: flex; flex-direction: column; transition-duration: 0.5s">
+      <div style="background:lime;height:50px;width:100px;border:3px solid orange; border-radius:5px;text-align: center; font-weight: bold">
+        Game Saved.
+      </div>
+      </div>-->
+    </div>
+    <div id="top-things">
+      <div style="display: flex; height:50px; margin-bottom: 5px"><p><span id="number">0</span> (+<span id="number/s">1</span>/s)</p>
+        <button id="productButton" class="productsButton center" onclick="product()"><span id="productButtonContent-false">Convert all your Multipliers into a new currency.</span><span id="productButtonContent-true">Product for <span id="factoredPointGain">0 Factored Points</span>.</span></button>
+      </div>
+      <div id="options-row">
+        <button class="tabButton normal">
+          Multipliers
+        </button>
+        <button class="tabButton normal">
+          Settings
+        </button>
+        <button class="tabButton normal">
+          Statistics
+        </button>
+        <button class="tabButton products onlyIfProduct" style="display: none">
+          Products
+        </button>
       </div>
     </div>
-    <p><span id="number">0</span> (+<span id="number/s">1</span>/s)</p>
-    <div id="options-row">
-      <button class="tabButton" onclick="tab(1)">
-        Multipliers
-      </button>
-      <button class="tabButton" onclick="tab(2)">
-        Settings
-      </button>
-      <button class="tabButton" onclick="tab(3)">
-        Statistics
-      </button>
-    </div>
-    <div id="tab1" style="display:none">
-      <div id="multiplierListMain">
-        <!--<div>
-          <button onclick="buyMultiplier(1)" class="normalButton unbuyable">
-            Buy 1 for<br /><span id="mult1Cost">10</span>
-          </button>
-          <p>
-            Multiplier 1
-          </p>
-          <p>Amount: <span id="mult1Amount"></span></p>
-          <p>x<span id="mult1Boost">1</span> (+BRUH/s)</p>
-        </div>-->
-        <div></div>
+    <div id="tab1" class="tab" style="display:none; margin-top:0px">
+      <p style="margin-top:0px">Multiplier Milestones: <span id="multMilestoneBoost">2</span>x every <span class="multMilestoneRate">10</span> of a Multiplier</p>
+      <div class="onlyIfProduct"><button class="normalButton" style="font-size: large; font-weight:550" onclick="buyMultiplier()">Max All<br>Multipliers</button>
+      <br><br>
+      </div>
+      <div id="multiplierListMain"> <!--This is where the Multipliers go.-->
       </div>
       <div>
         <p>
           <b>Multiplier Prestiges</b> (<span id="multiplierPrestiges">0</span>):
           Requires
-          <span id="multiplierPrestigeRequirement">250</span>
+          <b><span id="multiplierPrestigeRequirement">250</span></b>
+          (x<span id="multiplierPrestigeBoost">1</span> to Number gain)
         </p>
         <button class="normalButton unbuyable" onclick="multiplierPrestige()">
           Do a Multiplier Prestige
         </button>
-        <br>
-        <p class="invisible" style="font-size:25px" onclick="if(get('shh').className==='')this.className=''">
-          <span>Y</span>ou <span>fo</span>u<span>n</span><span>d t</span>h<span>e E</span>a<span></span>st<span>e</span>r <span>E</span><span>g</span>g, g<span></span><span>o</span>o<span>d jo</span><span>b</span>!
-        </p>
+        <br />
       </div>
     </div>
-    <div id="tab2" style="display:none">
+    <div id="tab2" class="tab" style="display:none">
       <div id="settings">
+        <div>
         <button class="normalButton" onclick="prompts.import()">
           Import
         </button>
@@ -108,16 +111,183 @@
         <button class="normalButton bad" onclick="prompts.reset()">
           Reset your Game
         </button>
-      </div><br>
-      <a id="changelog-link" href="/multiplying-idle-game/ChangeLog.html">Change Log</a>
+        </div>
+        <div>
+        <button class="normalButton" onclick="settings.cycleNotation()">Notation: <span id="notation">Scientific</span></button>
+        <button class="normalButton" onclick="settings.cycleGrowths()">Growths: <span id="growths">Additive</span></button>
+        <!--<button class="normalButton" onclick="settings.cycleAbbreviation()">Abbreviations: <span id="abbreviation">Min</span></button>-->
+        </div>
+        <div>
+          <div class="normalButton">
+            Tick Interval: <span id="msInterval">33</span>ms<br>
+            <input type="range" id="msIntervalSlider" min="17" max="100" value="33" />
+          </div>
+          <div class="normalButton" style="font-size: 13px">
+            <!--Make it so that this button is disabled if auto-saving is off (when implemented).-->
+            Auto-Save Rate: <span id="autoSaveInterval">1</span>s<br>
+            <input type="range" id="autoSaveIntervalSlider" min="5e2" max="3e4" value="1e3" />
+          </div>
+        </div>
+      </div>
+      <br />
+      <p>Version: <a id="changelog-newest-link">v0.3</a></p>
+      <a id="changelog-link">Change Log</a>
     </div>
-    <div id="tab3" style="display:none"></div>
-    <div id="tab4" style="display:none">
-      <p>
-        <!--You have <span id="prestigePoints">0</span> Prestige Points, translating
-        to a 1x multiplier to Mutliplier Boost Growth.-->
+    <div id="tab3" class="tab" style="display:none">
+      <div class="flexbox">
+        <button class="subtabButton normal" onclick="tab(3, 1)">
+          Times
+        </button>
+        <button class="subtabButton normal" onclick="tab(3, 2)">
+          Records
+        </button>
+        <button class="subtabButton normal" style="font-size: 9px" onclick="tab(3, 3)">
+          Achievements
+        </button>
+      </div>
+      <div id="tab3-subtab1" class="subtab" style="display:none">
+      <p>You have played for <span id="timeSinceStart">0 seconds</span>.</p>
+      <p>This Multiplier Prestige run has taken <span id="timeSinceMultiplierPrestige">0 seconds</span> so far.</p>
+      <p class="onlyIfProduct" style="display:none">This Product run has taken <span id="timeSinceProduct">0 seconds</span> so far.</p>
+      <p class="onlyIfProduct" style="display:none">Your fastest Product run took <span id="timeRecordProduct">0 seconds</span>.</p>
+      <p id="multiplierPrestigeHistory"></p>
+      </div>
+      <div id="tab3-subtab2" class="subtab" style="display:none">
+        <p>You have produced a total Number of <span id="totalNumber">0</span>, and your best is <span id="recordNumber">0</span>.</p>
+        <p class="onlyIfProduct">You have gained <span id="totalFP">0</span> FP in total.</p>
+      </div>
+      <div id="tab3-subtab3" class="subtab" style="display:none">
+        <p onclick="if(!get('shh').className.includes('invisible'))this.innerHTML='Y<span>ou</span> '+why+'<span></span>e '+dontbother+'<span>g</span>! :p<span></span>og:'">Implementing soon!
+        </p>
+        <ol>
+          <li>"Welcome": Buy your first Multiplier.</li>
+          <li>"Does this work?": Multiplier Prestige for the 1st time.</li>
+          <li>"Many Multipliers": Have at least 50 total Multipliers.</li>
+          <li>"A Zillion?": Reach a Number of <span class="number" data-value="1e10">1.000e10</span>.</li>
+          <li>"Hey where'd my progress go": Product for the 1st time.</li>
+          <li>"Coming back for more": Come back to the game after 8 hours of offline time.</li>
+          <li>"ADDICTED": Play for 10 days.</li>
+          <li>"Ok Google": Reach <span class="number" data-value="1.000e100">1.000e100</span>.</li>
+          <!--<li>"That was challenging": Complete a Challenge.</li>-->
+          <li>"Multiplying Multipliers": Make all Multipliers reach x<span class="number" data-value="1e10">1.000e10</span>.</li>
+          <!--<li>"Undefeated": Complete every Challenge at least once.</li>
+          <li>"Infinity...": Reach a Number of 1.79769e308.</li>
+          <li>"Is Multiplication relevant?": Reach a Number of 1e1e6.</li>
+          <li>"The next Google?": Make all Multipliers reach x1e100.</li>-->
+        </ol>
+      </div>
+    </div>
+    <div id="tab4" class="tab" style="display:none">
+      <div class="flexbox">
+      <button class="subtabButton products" onclick="tab(4, 1)">
+        Factor Upgrades
+      </button>
+      <button id="shh" class="subtabButton products invisible" onclick="tab(4,2);this.classList.remove('invisible')">
+        no
+      </button>
+    </div>
+      <div id="tab4-subtab1" class="subtab" style="display:none">
+      <p style="text-align: center; margin: 10px 0">
+        You have <span id="factoredPoints"><b style="font-size:larger">0</b> Factored Points</span><span id="factored-points-factor-upg-true">,<br />translating
+        to a <span id="factoredPointsBoost">1</span>x multiplier to all Multipliers</span>.
       </p>
+      <button id="factored-points-factor-upg-false" class="normal center" style="margin: 0 auto;margin-bottom: 10px" onclick="buyFactoredUpgrade('FactoredPoints')">
+        Unlock an effect of Factored Points multiplying all Multipliers. [FOREVER]
+        <br />Costs 5 FP
+        </button>
+      <div class="factorUpgrades">
+      <div class="row">
+        <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(1,1)">
+        Multiplier Prestiges' formula to Number gain is improved. The upgrade to the right will work.
+        <br />(n + 1)<sup>2</sup>
+        <br />Costs 1 FP
+      </button>
+      <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(1,2)">
+        Multiplier Prestiges' formula to Number gain is further improved. The upgrade to the left is required for this to take effect.
+        <br />2<sup>n</sup>
+        <br />Costs 2 FP
+      </button>
+      <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(1,3)">
+        Multiplier Prestiges also boost Multipliers.
+        <br />n + 1
+        <br />Currently: <span id="FU13Current">1</span>x
+        <br />Costs 5 FP
+      </button>
+      <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(1,4)">
+        You start runs with 2 Multiplier Prestiges.
+        <br />Costs 10 FP
+      </button>
+        </div>
+        <div class="row">
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(2,1)">
+            Multipliers are more effective proportinate to the total time played.
+            <br />sqrt(Days)+1
+            <br />Currently: <span id="FU21Current">1</span>x
+            <br />Costs 2 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(2,2)">
+            Factored Points boost Number production.
+            <br />FP+1
+            <br />Currently: <span id="FU22Current">1</span>x
+            <br />Costs 4 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(2,3)">
+            Number growth is raised to the 1.05.
+            <br />Costs 8 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(2,4)">
+            You start runs with 4 Multiplier Prestiges.
+            <br />Costs 50 FP
+          </button>
+        </div>
+        <div class="row">
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(3,1)">
+            Multiplier Milestones are 10% more effective.
+            <br />Costs 1 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(3,2)">
+            Multiplier Milestone rate is lowered by 10%.
+            <br />Costs 7 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(3,3)">
+            The current Multiplier Milestone significantly buffs Number production.
+            <br />10<sup>boost &times (10 / rate)</sup>
+            <br />Currently: <span id="FU33Current">1</span>x
+            <br />Costs 35 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(3,4)">
+            You start runs with 6 Multiplier Prestiges.
+            <br />Costs 200 FP
+          </button>
+        </div>
+        <div class="row">
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(4,1)">
+            Multipliers are stronger based on their tier.
+            <br />Multiplier 1 is 10% stronger, Multiplier 9 is 90% stronger etc.
+            <br />Costs 1 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(4,2)">
+            The amount of all Multipliers you own benefits Number gain.
+            <br />n + 1
+            <br />Currently: <span id="FU42Current">1</span>x
+            <br />Costs 5 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(4,3)">
+            Multiplier cost scalings are reduced.
+            <br />Costs 25 FP
+          </button>
+          <button class="factorUpgradeButton unbought normal" onclick="buyFactoredUpgrade(4,4)">
+            You start runs with 8 Multiplier Prestiges.
+            <br />Costs <span class="number" data-value="1e3">1000</span> FP
+          </button>
+        </div>
+      </div>
+      </div>
+      <div id="tab4-subtab2" class="subtab" style="display:none">
+        Achivement Unlocked: "No easter egg here"!
+        <p class="invisible" onclick="this.className=''">Don't even bother clicking below this text.</p>
+      </div>
     </div>
-    <input id="exportSaveData" value="" style="left: 99999px; width: 1px; height: 1px; position: fixed;">
+    <input id="exportSaveData" />
   </body>
 </html>
