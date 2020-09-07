@@ -57,7 +57,7 @@ var game = {
     most: 0
   },
   multipliers: [],
-  multiplierPrestiges: 10,
+  multiplierPrestiges: 0,
   time: {//Stores time data.
     lastTick: Date.now(),
     since: {
@@ -71,7 +71,7 @@ var game = {
     msInterval: 33
   },
   unlocks: {//Store data on if you have unlocked something or not.
-    products: true//false
+    products: false
   },
   settings: {
     notation: notations[0],
@@ -79,6 +79,6 @@ var game = {
     abbreviations: abbreviationSettings[1],
     autoSaveInterval: 5e3
   },
-  factoredPoints: 10,
+  factoredPoints: 0,
   factorUpgsBought: []
 };
