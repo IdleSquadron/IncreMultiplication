@@ -4,4 +4,4 @@ This is an incremental web-based video game where the main purpose is to grow a 
 
 <h2>Link</h2>This game is, most importantly, completely free to play.
 
-The game is located <a href="https://idlesquadron.github.io/multiplying-idle-game">here</a>.
+The game is located <a href="https://idlesquadron.github.io/IncreMultiplication">here</a>.
