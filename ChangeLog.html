@@ -223,7 +223,7 @@ Small (QoL/very small/bugfixing) updates are h4.
       <ul>
         <li>N/A</li>
       </ul>
-      <h2 id="newest"><a>v0.3</a> ~ A Prestige Layer (7/9/2020)</h2>
+      <h2><a>v0.3</a> ~ A Prestige Layer (7/9/2020)</h2>
       The update that adds the first ever Prestige Layer, and improvises many features. Also a rename of the game took place. This update took forever for whatever reason. <s>school</s><br><br>
       <b>Content:</b>
       <ul>
@@ -287,6 +287,21 @@ Small (QoL/very small/bugfixing) updates are h4.
             <li>Instances of where this happens is a number like 9,999,999,989 getting notated to 10.000e9 where it should be 9.999e9 or 1.000e10.</li>
           </ul>
         </li>
+      </ul>
+      <h4 id="newest">
+        <a>v0.301</a> ~ The 1<sup>st</sup> <small>smol</small> Update (9/9/2020)
+      </h4>
+      A very small update which fixes only one bug.
+      <br><br>
+      <b>Content:</b>
+      <ul>
+        <li>N/A</li>
+      </ul>
+      <b>Bug Fixes:</b>
+      <ul>
+        <li>Fixed a bug where FU21 becomes exceedingly more powerful than stated.<ul>
+          This is caused by part of FU21's formula being <code>Date.now() - game.time.since.start</code>, but <code>game.time.since.start</code> is not a timestamp of <code>Date.now()</code>, rather a counter in ms that goes up.
+          </ul></li>
       </ul>
       <b><i>More updates coming soon. They will be listed here as soon as possible...</i></b>
     </div>
