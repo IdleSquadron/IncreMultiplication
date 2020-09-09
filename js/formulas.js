@@ -34,10 +34,11 @@ const Formula = {
     Math.sqrt(Math.log10(Math.max(100, game.number.current)) - 1) - 6)) ** 0.1) **
       Math.max(1, Math.log10(game.number.current ** 0.4))),
   
-  factoredPointsBoost: () => Math.max(1, (Math.log10(Math.max(1, game.factoredPoints) ** Math.log10(Math.max(1, game.factoredPoints)))) * game.factorUpgsBought.includes('FactoredPoints') + 1),
+  factoredPointsBoost: () => Math.max(1, (Math.log10(Math.max(1, game.factoredPoints) ** Math.log10(Math.max(1, game.factoredPoints))))
+    * game.factorUpgsBought.includes('FactoredPoints') + 1),
   FU: {
     '13': () => (game.multiplierPrestiges + 1) ** game.factorUpgsBought.includes('1, 3'),
-    '21': () => (Math.sqrt((Date.now() - game.time.since.start)
+    '21': () => (Math.sqrt((game.time.since.start)
       / times.day * dev.timeMult) + 1) **
       game.factorUpgsBought.includes('2, 1'),
     '22': () => (Math.max(1, game.factoredPoints + 1)) ** game.factorUpgsBought.includes('2, 2'),
